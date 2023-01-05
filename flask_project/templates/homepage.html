@@ -1,0 +1,28 @@
+{% extends 'layout.html' %}
+
+{%block content%}
+<div class="contianer">
+    <div class="card text-center">
+        <div class="card-header"></div>
+        <div class="card-body">
+            <h2 class="card-title"> Multiple Server Process Management Tool</h2>
+            <p class="card-text">A web application to check cloud server and processes.</p>
+            <a class="btn btn-primary" href="{{url_for('register')}}">Sign Up Here</a>
+        </div>
+        <div class="card-footer text-muted"></div>
+    </div>
+</div>
+<script src="{{url_for('static',filename='main.js')}}"></script>
+{%endblock content%}
+{%block content_extra%}
+<div class="contianer">
+    <div class="card">
+        <div class="card-header"></div>
+        <div class="card-body">
+            <h2 class="card-title"> About</h2>
+            <p class="card-text">A web application to check cloud server and processes.</p>
+        </div>
+        <div class="card-footer text-muted"></div>
+    </div>
+</div>
+{%endblock content_extra%}
