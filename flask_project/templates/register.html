@@ -4,7 +4,7 @@
     <form method="POST" action="">
         {{form.hidden_tag()}}
         <fieldset class="form_group">
-            <legend class="border-bottom mt-4 mb-4">Join Today</legend>
+            <legend class="border-bottom mt-4 mb-4">Sign Up</legend>
             <div class="form-group">
                 {{form.username.label(class="form-control-label")}}
                 {%if form.username.errors%}
@@ -14,7 +14,6 @@
                     {%endfor%}
                     {%else%}
                         <input class="form-control form-control-lg" id="username" name="username">
-                        <!-- {{form.username(class="form-control form-control-lg")}} -->
                 {%endif%}
             </div>
 
@@ -27,7 +26,6 @@
                     {%endfor%}
                     {%else%}
                         <input class="form-control form-control-lg" id="email" name="email">
-                        <!-- {{form.email(class="form-control form-control-lg")}} -->
                 {%endif%}
             </div>
 

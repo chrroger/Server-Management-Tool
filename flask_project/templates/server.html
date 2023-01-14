@@ -1,4 +1,98 @@
 {% extends 'layout.html' %}
 {%block content%}
-<h1>Server</h1>
+<div class="container w-50 mt-4">
+    <form method="POST" action="">
+      {{form.hidden_tag()}}
+      <legend class="border-bottom mt-2 mb-4">Add Server</legend>
+      <div class="row">
+        <div class="col">
+          <div class="form-floating">
+              {%if form.host.errors%}
+                  {{form.host(class="form-control is-invalid")}}
+                  {%for error in form.host.errors%}
+                    <span>{{error}}</span>
+                  {%endfor%}
+                  {%else%}
+                    <input class="form-control" id="host" name="host">
+                    <label for="input">IP Address</label>
+              {%endif%}
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-floating">
+              {%if form.user.errors%}
+                  {{form.user(class="form-control is-invalid")}}
+                  {%for error in form.user.errors%}
+                    <span>{{error}}</span>
+                  {%endfor%}
+                  {%else%}
+                    <input class="form-control" id="user" name="user">
+                    <label for="input">User</label>
+              {%endif%}
+          </div>
+        </div>
+        <div class="col">
+          <div class="form_group mt-2">
+            <input class='btn btn-primary' type='submit' name='add' value='add'>
+          </div>
+        </div>
+      </div>
+    </form>
+</div>
+
+<div class="container w-50 t-20">
+    <legend class="border-bottom mt-4 mb-4">Display Server</legend>
+    <!-- <input type="text" id="ip" placeholder="Search for IP" onkeyup="searchIp()"> -->
+    <table class="fixed_header mt-4" id="ipTable">
+        <thead>
+          <tr>
+            <th>Host</th>
+            <th>User</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {%if data%}
+            {%for row in data%}
+              <tr>
+                <td>{{row[1]}}</td>
+                <td>{{row[2]}}</td>
+                <td>{{row[2]}}</td>
+              </tr>
+            {%endfor%}
+          {%else%}
+            <tr>
+              <td>IP ADDRESS NEEDED</td>
+              <td>USER NEEDED</td>
+            </tr>
+          {%endif%}
+        </tbody>
+      </table>
+</div>
+
+<script>
+  function searchIp(){
+    var input = document.getElementById("ip").value
+    var table = document.getElementById("ipTable")
+    var tbody = table.getElementsByTagName("tbody")[0]
+    var tr = tbody.getElementsByTagName("tr")
+    // console.log(tbody)
+    // console.log(tr)
+    for(i = 0; i<tr.length; i++){
+      td = tr[i].getElementsByTagName("td")[0]
+      if(td){
+        txt = td.textContent || td.innerText
+        // console.log(txt)
+        // console.log(input)
+        if((txt == input) || (input == "")){
+          tr[i].style.display = ""
+        }
+        else{
+          tr[i].style.display = "None"
+        }
+      }
+    }
+  }
+</script>
+
 {%endblock content%}

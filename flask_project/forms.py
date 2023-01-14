@@ -18,3 +18,9 @@ class LoginForm(FlaskForm):
     '''email = EmailField('Email', [validators.DataRequired(),validators.Email()])'''
     password = PasswordField('Password', [validators.DataRequired(), validators.Length(6,16)])
     submit = SubmitField(label='Login')
+
+#Form for connection
+class ConnectionForm(FlaskForm):
+    host = StringField('IP Address', [validators.IPAddress()])
+    user = StringField('User')
+    add = SubmitField(label='Add')

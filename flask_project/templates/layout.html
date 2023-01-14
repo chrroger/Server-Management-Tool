@@ -20,19 +20,31 @@
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="{{url_for('homepage')}}">Home</a>
               </li>
+              {%if current_user.is_authenticated%}
               <li class="nav-item">
-                <a class="nav-link disabled" href="#">Server Process</a>
+                <a class="nav-link active" href="{{url_for('server')}}">Server Page</a>
               </li>
+              {%else%}
+              <li class="nav-item">
+                <a class="nav-link disabled" href="#">Server Page</a>
+              </li>
+              {%endif%}
             </ul>
           </div>
         </div>
         <ul class="navbar-nav justify-content-end">
+          {%if current_user.is_authenticated%}
+          <li class="nav-item">
+            <a class="nav-link active" href="{{url_for('logout')}}">Logout</a>
+          </li>
+          {%else%}
           <li class="nav-item">
             <a class="nav-link active" href="{{url_for('register')}}">SignUp</a>
           </li>
           <li class="nav-item">
             <a class="nav-link active" href="{{url_for('login')}}">Login</a>
           </li>
+          {%endif%}
         </ul>
       </nav>
 </head>

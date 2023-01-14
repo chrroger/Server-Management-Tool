@@ -13,4 +13,9 @@ postgres: psql postgresql://roger:1234@localhost:5432/flaskapp
 alter user: alter user 'username' with superuser;
 check roles: \du
 check databases: \l
-switch user: \c 
+switch user: \c
+
+local activate app: python run.py
+
+git operations
+https://docs.github.com/en/get-started/importing-your-projects-to-github/importing-source-code-to-github/adding-locally-hosted-code-to-github
