@@ -1,0 +1,26 @@
+{% extends 'layout.html' %}
+{%block content%}
+<div class="container t-20">
+    <legend class="border-bottom mt-4 mb-4">Display Process</legend>
+    <table class="fixed_header mt-4" id="ipTable">
+        <tbody>
+          {%if data%}
+            {%for row in data%}
+            <tr>
+                {%for cell in row.split(' ')%}
+                    {%if cell.strip() != ''%}
+                        <td>{{cell}}</td>
+                    {%endif%}
+                {%endfor%}
+            </tr>                
+            {%endfor%}
+          {%else%}
+            <tr>
+              <td>IP ADDRESS NEEDED</td>
+              <td>USER NEEDED</td>
+            </tr>
+          {%endif%}
+        </tbody>
+      </table>
+</div>
+{%endblock content%}

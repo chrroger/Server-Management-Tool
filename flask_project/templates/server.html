@@ -57,7 +57,9 @@
               <tr>
                 <td>{{row[1]}}</td>
                 <td>{{row[2]}}</td>
-                <td>{{row[2]}}</td>
+                <td>
+                  <a href="{{url_for('process', host=row[1], user=row[2])}}">link</a>
+                </td>
               </tr>
             {%endfor%}
           {%else%}
