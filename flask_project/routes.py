@@ -1,11 +1,11 @@
 from flask_project import app, db, bcrypt
 from flask import render_template, redirect, url_for, flash, request
-from flask_project.forms import RegistrationForm, LoginForm, ConnectionForm
+from flask_project.forms import RegistrationForm, LoginForm, ConnectionForm, ProcessForm
 from flask_project.models import User, Host
 from flask_login import login_user, logout_user, current_user, login_required
 import psycopg2
 from sqlalchemy.exc import IntegrityError
-from flask_project.ssh import connect
+from flask_project.ssh import connect, processes, show_pids, kill
 
 try: 
     conn = psycopg2.connect(database="flaskapp", user="roger",  
@@ -24,7 +24,6 @@ def server():
     form = ConnectionForm()
     if form.validate_on_submit():
         host_input=Host.query.filter_by(host=form.host.data, user=form.user.data).first()
-        # print(host_input)
         if host_input:
             flash(f'Server and User exists!', category='danger')
         else:
@@ -77,5 +76,17 @@ def logout():
 
 @app.route('/process/host=<string:host>&user=<string:user>', methods=['POST','GET'])
 def process(host,user):
-    data = connect(host, user)
-    return render_template('process.html',title='Process', data=data)
+    conn = connect(host, user)
+    data = processes(conn)
+    print(data)
+    form = ProcessForm()
+    if form.validate_on_submit():
+        print(form.pid.data)
+        pids = show_pids(data)
+        pid = form.pid.data
+        print(pids)
+        if pid in pids:
+            kill(conn, pid)
+        else:
+            flash(f'Process does not exist!', category='danger')
+    return render_template('process.html',title='Process', form=form, data=data)

@@ -1,26 +1,56 @@
 {% extends 'layout.html' %}
 {%block content%}
 <div class="container t-20">
-    <legend class="border-bottom mt-4 mb-4">Display Process</legend>
-    <table class="fixed_header mt-4" id="ipTable">
-        <tbody>
-          {%if data%}
+  <div class="container">
+    <form method="POST" action="" class="row g-3">
+        {{form.hidden_tag()}}
+            <legend class="border-bottom mt-4 mb-4">Process</legend>
+            <div class="col-auto">
+                {{form.pid.label(class="form-control-label")}}
+            </div>
+            <div class="col-auto">
+                {%if form.pid.errors%}
+                    {{form.pid(class="form-control form-control-lg is-invalid")}}
+                    {%for error in form.pid.errors%}
+                        <span>{{error}}</span>
+                    {%endfor%}
+                    {%else%}
+                        {{form.pid(class="form-control form-control-lg")}}
+                {%endif%}
+            </div>
+        <div class="col-auto">
+            {{form.submit(class='btn btn-primary')}}
+        </div>
+    </form>
+  </div>
+
+  <table class="table fixed_header table-striped w-50 mt-2">
+      <thead>
+        <tr>
+          <td>USER</td>
+          <td>PID</td>
+          <td>%CPU</td>
+          <td>%MEM</td>
+          <td>VSZ</td>
+          <td>RSS</td>
+          <td>TTY</td>
+          <td>STAT</td>
+          <td>START</td>
+          <td>TIME</td>
+          <td>COMMAND</td>
+        </tr>
+      </thead>
+      <tbody>
+        {%if data%}
+          <tr>
             {%for row in data%}
-            <tr>
-                {%for cell in row.split(' ')%}
-                    {%if cell.strip() != ''%}
-                        <td>{{cell}}</td>
-                    {%endif%}
-                {%endfor%}
-            </tr>                
-            {%endfor%}
-          {%else%}
-            <tr>
-              <td>IP ADDRESS NEEDED</td>
-              <td>USER NEEDED</td>
-            </tr>
-          {%endif%}
-        </tbody>
-      </table>
+              {%for cell in row%}
+                <td>{{cell}}</td>
+              {%endfor%}
+          </tr>                
+          {%endfor%}
+        {%endif%}
+      </tbody>
+    </table>
 </div>
 {%endblock content%}

@@ -48,7 +48,7 @@
           <tr>
             <th>Host</th>
             <th>User</th>
-            <th>Status</th>
+            <th>Process</th>
           </tr>
         </thead>
         <tbody>
@@ -58,7 +58,7 @@
                 <td>{{row[1]}}</td>
                 <td>{{row[2]}}</td>
                 <td>
-                  <a href="{{url_for('process', host=row[1], user=row[2])}}">link</a>
+                  <a href="{{url_for('process', host=row[1], user=row[2])}}">display page</a>
                 </td>
               </tr>
             {%endfor%}
